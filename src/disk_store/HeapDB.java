@@ -207,7 +207,7 @@ public class HeapDB implements DB, Iterable<Record> {
 					rec.serialize(buffer.buffer, loc);
 					recMap.setBit(recNum, true);
 					bf.write(blockNum, buffer);
-					
+					blockMap.setBit(rec.getKey(), true);
 					// index maintenance
 					// YOUR CODE HERE
 					
@@ -288,7 +288,12 @@ public class HeapDB implements DB, Iterable<Record> {
 		}
 		
 		List<Record> result = new ArrayList<Record>();
-		
+		for(Record rec :this) {
+			if(((IntField)rec.get(fieldNum)).getValue() == key) {
+				result.add(rec);
+			}
+		}
+		return result;
 		// YOUR CODE HERE
 		
 		// You should use an index for the lookup if an index is
@@ -301,7 +306,7 @@ public class HeapDB implements DB, Iterable<Record> {
 		// }
 
 		// replace the following line with your return statement
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
 	}
 	
 	
@@ -390,8 +395,12 @@ public class HeapDB implements DB, Iterable<Record> {
 		// YOUR CODE HERE
 		// for each record in the DB, you will need to insert its
 		// search key value and the block number
-
-		throw new UnsupportedOperationException();
+		int b = bitmapBlock + 1;
+		for(Record rec : this) {
+			index.insert(rec.getKey(),b );
+			b++;
+		}
+		
 	}
 	
 	/**

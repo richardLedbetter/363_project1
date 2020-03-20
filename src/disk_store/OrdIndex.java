@@ -1,6 +1,7 @@
 package disk_store;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,8 +20,10 @@ public class OrdIndex implements DBIndex {
 	/**
 	 * Create an new ordered index.
 	 */
+	 ArrayList <Integer> table;
+	
 	public OrdIndex() {
-		throw new UnsupportedOperationException();
+		table = new ArrayList ();
 	}
 	
 	@Override
@@ -30,7 +33,7 @@ public class OrdIndex implements DBIndex {
 	
 	@Override
 	public void insert(int key, int blockNum) {
-		throw new UnsupportedOperationException();
+		table.add(key);
 	}
 
 	@Override
