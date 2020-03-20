@@ -290,7 +290,8 @@ public class HeapDB implements DB, Iterable<Record> {
 		List<Record> result = new ArrayList<Record>();
 		for(Record rec :this) {
 			if(((IntField)rec.get(fieldNum)).getValue() == key) {
-				result.add(rec);
+				Record tmp = new Record(rec);
+				result.add(tmp);				
 			}
 		}
 		return result;
